@@ -4,12 +4,13 @@ using System.Text;
 
 namespace RPS_Game
 {
-    class Round
+    public class Round
     {
-        private Player winner;
+        private Player _winner;//store who won this round
 
         public string p1Choice { get; set; }
         public string p2Choice { get; set; }
-        public Player Winner { get => winner; set => winner = value; }
+        public Boolean pWinner = false;//false means player 1 won the round. True means player 2 won the round.
+        public Player Winner { get => _winner; set => _winner = value; }
     }
 }
