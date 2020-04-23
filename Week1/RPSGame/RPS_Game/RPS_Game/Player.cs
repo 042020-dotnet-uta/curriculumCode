@@ -13,9 +13,19 @@ namespace RPS_Game
 			set { _Name = value; }
 		}
 
-		private int wins { get; set; }
-		private int losses { get; set; }
+		private int _wins;
+		public int Wins
+		{
+			get { return _wins; }
+			set { _wins = value; }
+		}
 
+		private int _losses;
+		public int Losses
+		{
+			get { return _losses; }
+			set { _losses = value; }
+		}
 
 		public Player() { }
 

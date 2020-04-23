@@ -62,6 +62,20 @@ namespace RPS_Game
             oneRound.p1Choice = rps[p1rand];
             oneRound.p2Choice = rps[p2rand];
 
+            return DetermineRoundWinner(p1rand, p2rand, oneRound);
+
+        }
+
+        /// <summary>
+        /// This method takes the choices of p1 and p2 and determins a winner
+        /// It also updates all model fields according to the winner.
+        /// </summary>
+        /// <param name="p1rand"></param>
+        /// <param name="p2rand"></param>
+        /// <param name="oneRound"></param>
+        /// <returns></returns>
+        private static Round DetermineRoundWinner(int p1rand, int p2rand, Round oneRound)
+        {
             int win = p1rand - p2rand + 2;//determine the winner
 
             switch (win)
@@ -73,13 +87,12 @@ namespace RPS_Game
                     break;
                 case 1: // p1 lost since result is negative rock(0) - paper(1) or 1 - 2
                     p2Wins++;
-                    oneRound.Winner = game.p2; 
+                    oneRound.Winner = game.p2;
                     oneRound.pWinner = true;
                     break;
                 case 2: // tie
                     ties++;
                     oneRound.Winner = null;
-                    //oneRound.pWinner = null;
                     break;
                 case 3:// p1 wins as 1 - 0 or 2 - 1;
                     p1Wins++;
@@ -94,6 +107,7 @@ namespace RPS_Game
                 default:
                     break;
             }
+
             return oneRound;
         }
 
@@ -108,14 +122,19 @@ namespace RPS_Game
         {
             if (p1Wins == 2)
             {
-                game.Winner = game.p1;
+                game.Winner = game.p1;  //assign the winner to the winners spot in the game
+                game.Winner.Wins++;     //increment the winners wins
+                game.p2.Losses++;       //decrement the loosers losses
             }
             else if(p2Wins == 2)
             {
-                game.Winner = game.p2;
+                game.Winner = game.p2;  //assign the winner to the winners spot in the game
+                game.Winner.Wins++;     //increment the winners wins
+                game.p1.Losses++;       //decrement the loosers losses
             }
             else
             {
+                //just in case the wrong number of games is played
                 Console.WriteLine("something happened and neither player won with 2 wins.");
             }
         }
