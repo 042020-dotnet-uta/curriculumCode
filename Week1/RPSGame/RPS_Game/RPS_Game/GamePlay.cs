@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace RPS_Game
 {
-    static class GamePlay
+    public class GamePlay
     {
         private static Player p1 = new Player();
         private static Player p2 = new Player();
@@ -14,12 +16,26 @@ namespace RPS_Game
         private static string[] rps = { "Rock", "Paper", "Scissor" }; // Declare an string array to store Rock, Paper,and Scissors strings
         private static int p1Wins = 0; // win count for player 1
         private static int p2Wins = 0; // win count for player 2
-        private static int ties = 0; // amount of tied rounds
-        private static int rounds = 0; // number of rounds
+        //private static int ties = 0;
+        
+        //install the logger for a console app.
+        private readonly ILogger _logger;
+        public GamePlay(ILogger<GamePlay> logger)
+        {
+            _logger = logger;
+        }
+
 
         //get the users data
-        public static void GetPlayersName()
+        public void GetPlayersName()
         {
+            _logger.LogInformation("LogInformation = Hello. My name is Log LogInformation");
+            _logger.LogWarning("LogWarning = At {time} Now I'm Loggy McLoggerton", DateTime.Now);
+            _logger.LogCritical("LogCritical = As of now, I'm Scrog McLog");
+            _logger.LogDebug("Log Debug");//not printed to console
+            _logger.LogError("LogError");
+            _logger.LogTrace("Log Trace = Tracing my way back home.");//not printed to console
+
             Console.WriteLine("Enter Player1 Name: "); //prompts user to input player 1 name
             String player = Console.ReadLine(); //takes input from user and stores it as player 1 name
             p1.Name = player;
@@ -29,12 +45,10 @@ namespace RPS_Game
             p2.Name = player;
         }
 
-        public static void RunGame()
+        public void RunGame()
         {
             //create the game with players
             game = new Game(p1,p2);
-            //game.p1 = p1;
-            //game.p2 = p2;
 
             //run rounds till a player has 2 wins. 
             while (p1Wins < 2 && p2Wins < 2)
@@ -49,7 +63,7 @@ namespace RPS_Game
         /// <summary>
         /// this method runs one round
         /// </summary>
-        private static Round RunRound()
+        private Round RunRound()
         {
             //get random coices for each player
             int p1rand = GetRandomNum();
@@ -74,7 +88,7 @@ namespace RPS_Game
         /// <param name="p2rand"></param>
         /// <param name="oneRound"></param>
         /// <returns></returns>
-        private static Round DetermineRoundWinner(int p1rand, int p2rand, Round oneRound)
+        private Round DetermineRoundWinner(int p1rand, int p2rand, Round oneRound)
         {
             int win = p1rand - p2rand + 2;//determine the winner
 
@@ -91,7 +105,7 @@ namespace RPS_Game
                     oneRound.pWinner = true;
                     break;
                 case 2: // tie
-                    ties++;
+                    //ties++;
                     oneRound.Winner = null;
                     break;
                 case 3:// p1 wins as 1 - 0 or 2 - 1;
@@ -111,41 +125,41 @@ namespace RPS_Game
             return oneRound;
         }
 
-        private static int GetRandomNum()
+        private int GetRandomNum()
         {
             return rand.Next(3);
         }
 
 
         //check the p1Wins and p2Wins to see who won.
-        public static void AssignWinner()
+        public void AssignWinner()
         {
             if (p1Wins == 2)
             {
                 game.Winner = game.p1;  //assign the winner to the winners spot in the game
                 game.Winner.Wins++;     //increment the winners wins
-                game.p2.Losses++;       //decrement the loosers losses
+                game.p2.Losses++;       //increment the loosers losses
             }
             else if(p2Wins == 2)
             {
                 game.Winner = game.p2;  //assign the winner to the winners spot in the game
                 game.Winner.Wins++;     //increment the winners wins
-                game.p1.Losses++;       //decrement the loosers losses
+                game.p1.Losses++;       //increment the loosers losses
             }
             else
             {
                 //just in case the wrong number of games is played
-                Console.WriteLine("something happened and neither player won with 2 wins.");
+                _logger.LogDebug("something happened and neither player won with 2 wins.");
             }
         }
 
 
         // Print the results bases on the objects 
-        public static void PrintResults()
-        {
+        public void PrintResults()
+        {   
+            int r = 1;
             foreach (var round in game.Rounds)
             {
-                int r = 1;
                 if (round.Winner == null) 
                 {
                     Console.WriteLine($"In round {r}, there was no winner because {game.p1.Name} chose {round.p1Choice} and {game.p2.Name} chose {round.p2Choice}.");
