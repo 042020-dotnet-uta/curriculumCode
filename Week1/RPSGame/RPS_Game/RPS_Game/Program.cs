@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
 
 namespace RPS_Game
 {
@@ -25,9 +27,13 @@ namespace RPS_Game
 
         private static void ConfigureServices(ServiceCollection services)
         {
-            services.AddLogging(configure => configure.AddConsole())
-            .AddTransient<GamePlay>();
+            services.AddLogging((configure) =>
+            {
+                configure.ClearProviders();
+                configure.AddConsole();
+                configure.SetMinimumLevel(LogLevel.Trace);
+            })
+            .AddTransient<GamePlay>(); 
         }
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Logging;
 
 namespace RPS_Game
 {
@@ -29,9 +30,12 @@ namespace RPS_Game
 
 		public Player() { }
 
-		public Player(string name)
+		private readonly ILogger _logger;
+		public Player(string name, ILogger<Player> logger)
 		{
 			_Name = name;
+			_logger = logger;
+			_logger.LogInformation("here in player");
 		}
 
 
