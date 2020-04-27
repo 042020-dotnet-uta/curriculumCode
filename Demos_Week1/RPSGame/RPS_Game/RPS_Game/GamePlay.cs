@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RPS_Game.Models;
 
 namespace RPS_Game
 {
@@ -16,8 +18,9 @@ namespace RPS_Game
         private static string[] rps = { "Rock", "Paper", "Scissor" }; // Declare an string array to store Rock, Paper,and Scissors strings
         private static int p1Wins = 0; // win count for player 1
         private static int p2Wins = 0; // win count for player 2
-        //private static int ties = 0;
         
+        //create a DB context to manipulate the DB.
+        RPS_DbContext db = new RPS_DbContext();
         //install the logger for a console app.
         private readonly ILogger _logger;
         public GamePlay(ILogger<GamePlay> logger)
@@ -29,12 +32,12 @@ namespace RPS_Game
         //get the users data
         public void GetPlayersName()
         {
-            _logger.LogInformation("LogInformation = Hello. My name is Log LogInformation");
-            _logger.LogWarning("LogWarning = At {time} Now I'm Loggy McLoggerton", DateTime.Now);
-            _logger.LogCritical("LogCritical = As of now, I'm Scrog McLog");
-            _logger.LogDebug("Log Debug");//not printed to console
-            _logger.LogError("LogError");
-            _logger.LogTrace("Log Trace = Tracing my way back home.");//not printed to console
+            //_logger.LogInformation("LogInformation = Hello. My name is Log LogInformation");
+            //_logger.LogWarning("LogWarning = At {time} Now I'm Loggy McLoggerton", DateTime.Now);
+            //_logger.LogCritical("LogCritical = As of now, I'm Scrog McLog");
+            //_logger.LogDebug("Log Debug");//not printed to console
+            //_logger.LogError("LogError");
+            //_logger.LogTrace("Log Trace = Tracing my way back home.");//not printed to console
 
             Console.WriteLine("Enter Player1 Name: "); //prompts user to input player 1 name
             String player = Console.ReadLine(); //takes input from user and stores it as player 1 name
@@ -43,10 +46,18 @@ namespace RPS_Game
             Console.WriteLine("Enter Player2 Name: "); //prompts user to input player 1 name
             player = Console.ReadLine(); //takes input from user and stores it as player 1 name
             p2.Name = player;
+
+            db.Add(p1);
+            db.Add(p2);
+            db.SaveChanges();
+            
         }
 
         public void RunGame()
         {
+            var playerMark = db.Players.Where(p => p.Name == "Mark").FirstOrDefault();
+            Console.WriteLine($"\n\n\tThe players name is {playerMark.Name} and it's ID is {playerMark.PlayerId}.\n\n");
+
             //create the game with players
             game = new Game(p1,p2);
 

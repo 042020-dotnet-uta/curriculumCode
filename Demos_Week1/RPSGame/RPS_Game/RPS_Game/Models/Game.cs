@@ -6,6 +6,7 @@ namespace RPS_Game
 {
     public class Game
     {
+        public int GameId { get; set; }
         public List<Round> Rounds = new List<Round>();
         public Player p1 { get; set; }
         public Player p2 { get; set; }
@@ -17,9 +18,6 @@ namespace RPS_Game
             get { return _winner; }
             set { _winner = value; }
         }
-
-
-
         public Game() { }
 
         public Game(Player p1, Player p2)

@@ -7,6 +7,7 @@ namespace RPS_Game
 {
     public class Player
     {
+		public int PlayerId { get; set; }
 		private string _Name;
 		public string Name
 		{
