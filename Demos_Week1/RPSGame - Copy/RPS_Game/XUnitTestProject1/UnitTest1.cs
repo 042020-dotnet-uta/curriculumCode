@@ -10,12 +10,12 @@ namespace XUnitTestProject1
         [Fact]
         public void Test1()
         {
-
+            //Arrange
             //configure the inmemory DB. This is done in every test.
             var options = new DbContextOptionsBuilder<DbContextClass>()
                 .UseInMemoryDatabase(databaseName: "CustomNameForThisTestsInMemoryDb")
                 .Options;
-            //Arrange
+            
             //use the using() to arrange the Db.
             using (var context = new DbContextClass(options))
             {
@@ -33,6 +33,9 @@ namespace XUnitTestProject1
 
             //Act
             // Use a separate instance of the context to verify correct data was saved to database
+
+
+            //Assert
             using (var context = new DbContextClass(options))
             {
                 Assert.Equal(1, context.Players.Count());
@@ -40,9 +43,6 @@ namespace XUnitTestProject1
                 var p1Name = context.Players.Where(p => p.PlayerId == 11).FirstOrDefault();
                 Assert.Equal("Geralt", p1Name.Name);
             }
-
-            //Assert
-
 
         }
     }

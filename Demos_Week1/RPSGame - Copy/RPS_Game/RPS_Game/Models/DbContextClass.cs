@@ -24,13 +24,9 @@ namespace RPS_Game.Models
         {
             //use this for SQLite
             if (!options.IsConfigured)
+            {
                 options.UseSqlite("Data Source=blogging.db");
-
-            //use this for localDb SSMS
-            //if (!options.IsConfigured)
-            //{
-            //        options.UseSQLServer("Data Source = (LocalDB)\v11.0; AttachDbFileName =| DataDirectory |\DatabaseFileName.mdf; InitialCatalog = DatabaseName; Integrated Security = True; MultipleActiveResultSets = True");
-            //}
+            }
         }
     }
 }

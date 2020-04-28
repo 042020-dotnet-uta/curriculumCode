@@ -28,6 +28,10 @@ namespace RPS_Game
             _logger = logger;
         }
 
+        public GamePlay()
+        {
+        }
+
 
         //get the users data
         public void GetPlayersName()
@@ -136,6 +140,10 @@ namespace RPS_Game
             return oneRound;
         }
 
+        /// <summary>
+        /// Returns a random number between 0 and 3
+        /// </summary>
+        /// <returns> int </returns>
         private int GetRandomNum()
         {
             return rand.Next(3);
