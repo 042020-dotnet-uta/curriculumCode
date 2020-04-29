@@ -12,12 +12,12 @@ namespace RPSGame_XUnitTesting
         [Fact]
         public void AddsPlayerToDb()
         {
-            //Arrange
+            //Arrange - create an object to configure your inmemory DB.
             var options = new DbContextOptionsBuilder<RPS_DbContext>()
                 .UseInMemoryDatabase(databaseName: "AddsPlayerToDb")
                 .Options;
 
-            //Act
+            //Act - send in the configure object to the DbContext constructor to be used in configuring the DbContext
             using (var db = new RPS_DbContext(options))
             {
                 Player p = new Player
