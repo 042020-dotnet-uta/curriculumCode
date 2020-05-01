@@ -42,12 +42,31 @@ namespace RPSGame_XUnitTesting
         }
 
         [Fact]
-        public void Test2()
+        public void DoesInMemoryDbTranalateToBusinessLogicTest()
         {
             //Arrange
             var options = new DbContextOptionsBuilder<RPS_DbContext>()
                 .UseInMemoryDatabase(databaseName: "Test1")
                 .Options;
+
+            //ACT
+            using (var context = new RPS_DbContext(options))
+            {
+                GamePlay testgame = new GamePlay();
+                testgame.GetPlayersName();
+            }
+
+            //ASSERT
+            //see if the inMemory Db is used by the 
+            using (var context = new RPS_DbContext(options))
+            {
+                var p1Name = context.Players.Where(p => p.Name == "Spam").FirstOrDefault();
+                Assert.Equal("spam", p1Name.Name);
+            }
+
+
+
+
 
         }
 

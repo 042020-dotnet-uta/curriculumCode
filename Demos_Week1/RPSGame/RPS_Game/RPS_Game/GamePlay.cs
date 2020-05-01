@@ -28,10 +28,7 @@ namespace RPS_Game
             _logger = logger;
         }
 
-        public GamePlay()
-        {
-        }
-
+        public GamePlay() { }
 
         //get the users data
         public void GetPlayersName()
