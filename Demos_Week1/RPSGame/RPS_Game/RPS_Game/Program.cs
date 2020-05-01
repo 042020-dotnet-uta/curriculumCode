@@ -31,7 +31,7 @@ namespace RPS_Game
             {
                 configure.ClearProviders();
                 configure.AddConsole();
-                configure.SetMinimumLevel(LogLevel.Trace);
+                configure.SetMinimumLevel(LogLevel.Information);
             })
             .AddTransient<GamePlay>(); 
         }

@@ -9,7 +9,7 @@ using RPS_Game.Models;
 
 namespace RPS_Game
 {
-    public class GamePlay
+    public class GamePlay /*: Interface1*/
     {
         private static Player p1 = new Player();
         private static Player p2 = new Player();
