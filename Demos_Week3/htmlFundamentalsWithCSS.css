@@ -1,0 +1,47 @@
+body {
+    background-color: lightgray;
+}
+
+p {
+    text-align: center;
+    color:royalblue;
+}
+
+.span1{
+    text-align: right;
+    background-color: lime;
+}
+
+.class1:hover {
+    background-color: magenta;
+    font-variant: small-caps;
+}
+
+.link1:visited{
+    display: none;
+    /* visibility: hidden; */
+    color: maroon;
+}
+
+/*THIS REALLY SELECTS THE SIBLINGS. 
+In this case. it selects the li siblings on any ol OR ul*/
+.orderedList1 > :nth-child(odd){
+    color: mediumseagreen;
+}
+
+ul + ol {
+    background-color: yellowgreen;
+}
+
+span ~ p{
+    background-color: aquamarine;
+}
+
+.table1{
+    background-color: red;
+    padding: 50%;
+    border: 20px solid black !important;
+    width: 300px;
+    margin: 200;
+    border-color: greenyellow !important;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Tech Lead" content="Nickolas">
+    <title>HtmlFundamentalsDoc</title>
+</head>
+<body>
+    <p id="first-paragraph">
+        <h1>This is my <strong>HTML</strong> Fundamentals Document</h1>
+        <h2>This is h2</h2>
+        <h3>this <ins>is</ins> h3</h3>
+        <h4>this <em>is</em> h4</h4>
+        <h5>this <i>is</i> h5</h5><br>
+        <h6>this <del>is</del> h6</h6>
+    </p>
+
+    <!--span does not give styling to all emements inside the <span>-->
+    <span style="background-color: lightgreen">
+        <h1>This is my <strong>HTML</strong> Fundamentals Document</h1>
+        <h2>This is h2</h2>
+        <h3>this <ins>is</ins> h3</h3>
+        <h4>this <em>is</em> h4</h4>
+        <h5>this <i>is</i> h5</h5><br>
+        <h6>this <del>is</del> h6</h6>
+    </span>
+
+    <!--<div> imparts stylign to all elements in side the <div>-->
+    <div class="class1" style="background-color: lightgreen">   
+        <h1>This is my <strong>HTML</strong> Fundamentals Document</h1>
+        <h2>This is h2</h2>
+        <h3>this <ins>is</ins> h3</h3>
+        <h4>this <em>is</em> h4</h4>
+        <h5>this <i>is</i> h5</h5><br>
+        <h6>this <del>is</del> h6</h6>
+
+    </div>
+
+    <div title="This is a div title">
+        Lorem ipsum <mark style="background-color: red">dolor</mark> sit amet consectetur adipisicing 
+        elit. In, itaque natus qui cum aperiam sunt eveniet unde, 
+        ex alias inventore accusamus quibusdam dolores repellendus 
+        hic. Id nihil totam vitae quasi?
+    </div>
+<br>
+<!--use '#' to add a dummy link or to link to an id element in the same doc.-->
+    <a href="#first-paragraph">Revature</a>
+
+    <ul>
+        <li>element 1</li>
+        <li>element 2</li>
+        <li>element 3</li>
+        <li>element 4</li>
+        <li>element 5</li>
+    </ul>
+
+    <!-- use 'ol>li*3 to get a list with 3 elements.-->
+    <ol>
+        <li>number1</li>
+        <li>number2</li>
+        <li>number3</li>
+        <li>number4</li>
+        <li>number5</li>
+        <li>number6</li>
+    </ol>
+
+    <!--table>thead>th*3-->
+    <!--https://code.visualstudio.com/docs/editor/emmet 
+-->
+    <table>
+        <thead>
+            <th>
+               city
+            </th>
+            <th>
+                state
+            </th>
+            <th>
+                zip code
+            </th>
+        </thead>
+        <tbody>
+            <tr>
+                <td align="right">Crowley</td>
+                <td>Texas</td>
+                <td>76028</td>
+            </tr>
+            <tr>
+                <!--you can align left, right or center-->
+                <td align="left">.....Fort Worth...</td>
+                <td>Texas</td>
+                <td>76036</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <!--entities with character codes-->
+    <!--https://docs.emmet.io/cheat-sheet/-->
+    <!--you can install a extension in vscode called live server which can refresh the browser automatically as you save it. No need to keep refreshing.-->
+<p>
+    Lorem ipsum dolor &#213C;  &gt; &#2192; sit amet consec
+</p>
+
+<form action="#" method="GET">
+<ul>
+    <li>
+        <label for="name">Name:</label>
+        <input type="email" id="name" name="user-name" placeholder="gimy@hoffa.com">
+        <input type="submit" value="submit your name">
+        <input type="checkbox" name="checkbox1">
+        <select name="variousValues" autofocus>
+            <option value="value1">V1</option>
+            <option value="value2">V2</option>
+            <option value="value3">V3</option>
+            <option value="value4">V4</option>
+        </select>
+    </li>
+</ul>
+
+
+
+
+</form>
+
+
+    <br><br><br><br>
+</body>
+</html>
