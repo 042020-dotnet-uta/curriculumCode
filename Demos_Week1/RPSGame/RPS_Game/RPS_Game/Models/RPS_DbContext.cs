@@ -21,9 +21,9 @@ namespace RPS_Game.Models
         {
             if (!options.IsConfigured)
             {
-                //options.UseSqlite("Data Source=rpsGame.db");
+                options.UseSqlite("Data Source=rpsGame.db");
                 //options.UseSqlServer("Server=MARKCMOORE\\SQLEXPRESS\\SQLEXPRESS;Database=rpsgame;");
-                options.UseSqlServer("Data Source=(LocalDb)\\MARKCMOORE");
+                //options.UseSqlServer("Data Source=(LocalDb)\\MARKCMOORE");
             }
         }
     }

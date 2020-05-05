@@ -22,22 +22,22 @@ namespace RPSGame_XUnitTesting
             {
                 Player p = new Player
                 {
-                    Losses = 5,
-                    Name = "Geralt",
-                    Wins = 11
+                    PlayerId = 100,
+                    Losses = 2,
+                    Wins = 11,
+                    Name = "spark"
                 };
 
                 db.Add(p);
                 db.SaveChanges();
             }
-
             //Assert
-            using (var context = new RPS_DbContext(options))
+            using (var db = new RPS_DbContext(options))
             {
-                Assert.Equal(1, context.Players.Count());
+                Assert.Equal(1, db.Players.Count());
 
-                var p1Name = context.Players.Where(p => p.Wins == 11).FirstOrDefault();
-                Assert.Equal("Geralt", p1Name.Name);
+                var p1Name = db.Players.Where(p => p.Wins == 11).FirstOrDefault();
+                Assert.Equal("spark", p1Name.Name);
             }
         }
 
@@ -50,7 +50,7 @@ namespace RPSGame_XUnitTesting
                 .Options;
 
             //ACT
-            using (var context = new RPS_DbContext(options))
+            using (var db = new RPS_DbContext(options))
             {
                 GamePlay testgame = new GamePlay();
                 testgame.GetPlayersName();
@@ -58,9 +58,9 @@ namespace RPSGame_XUnitTesting
 
             //ASSERT
             //see if the inMemory Db is used by the 
-            using (var context = new RPS_DbContext(options))
+            using (var db = new RPS_DbContext(options))
             {
-                var p1Name = context.Players.Where(p => p.Name == "Spam").FirstOrDefault();
+                var p1Name = db.Players.Where(p => p.Name == "Spam").FirstOrDefault();
                 Assert.Equal("spam", p1Name.Name);
             }
 
@@ -70,15 +70,15 @@ namespace RPSGame_XUnitTesting
 
         }
 
-        [Fact]
-        public void Test3()
-        {
-            //Arrange
-            var options = new DbContextOptionsBuilder<RPS_DbContext>()
-                .UseInMemoryDatabase(databaseName: "Test1")
-                .Options;
+        //[Fact]
+        //public void Test3()
+        //{
+        //    //Arrange
+        //    var options = new DbContextOptionsBuilder<RPS_DbContext>()
+        //        .UseInMemoryDatabase(databaseName: "Test1")
+        //        .Options;
 
-        }
+        //}
 
 
     }
