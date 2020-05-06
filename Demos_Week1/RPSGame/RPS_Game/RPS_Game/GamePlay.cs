@@ -21,6 +21,7 @@ namespace RPS_Game
         
         //create a DB context to manipulate the DB.
         RPS_DbContext db = new RPS_DbContext();
+        
         //install the logger for a console app.
         private readonly ILogger _logger;
         public GamePlay(ILogger<GamePlay> logger)
