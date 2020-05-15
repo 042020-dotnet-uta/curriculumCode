@@ -1,34 +1,41 @@
-#this targets the master branch of hte wired in GitHub repo. IT watches for any action against master
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+#what branch we are watching
 trigger:
   - 'master'
 
-#targets any PR on any branch in the repo. highly recommended to put this in to control which
+pool: 
+  vmImage: 'ubuntu-latest'
+
+variables:
+- name: 'instructor' 
+  value: 'Mark'
+#watch for PR's
 pr: 'none'
 
-#stages allow the sME SERIES OF ACTIONS TO BE REPOICATED ON MULTIPLE ENVIRONMENTS.
+#groups sequential actions
 stages:
   - stage:
-    #a job is the smallest unit that can run in a pipeline
-    #Job is the "unit of work"" that gets schedules on the machine. 
-    #divide the scripts into different jobs.
-    jobs:  
-      - job: 'build'
-        #what CLI command to use
-        steps:
-          - script: 'dotnet build'
-
-  - stage:
     jobs:
-      job: 'test'
+      - job: 'build'
+        steps:
+        #remember, paths are relative to where the YAML file is.
+          - script: dotnet build 'pipelineMvcDemo/pipelineMvcDemo.csproj'
+          - script: echo "Hey there $(instructor)!"
+
+      - job: 'test'
         dependsOn: 'build'
         steps:
           - script: 'dotnet test'
 
-      job: 'publish'
+      - job: 'publish'
         dependsOn: 'test'
         steps:
           - script: 'dotnet publish'
 
+name: '$(date:yyyyMMdd)$(rev:rr)'
 
-#this gives the whole build a lname.
-name: '$(date:yyyyMMdd)$(rev:.rr)'
+        
