@@ -1,0 +1,111 @@
+name: '$(date:yyyyMMdd)$(rev:rr)'
+#what branch we are watching
+trigger:
+  - 'master'
+pr: 'none'
+pool: 
+  vmImage: 'ubuntu-latest'
+variables:
+  instructor: 'Mark'
+  sdkVersion: '3.1.x'
+  solutionPath: 'pipelineMvcDemo/pipelineMvcDemo.csproj'
+  buildConfiguration: 'Release'
+
+#stages group sequential actions
+stages:
+  - stage: 'build'
+    jobs:
+      - job: 'buildjob'  
+        pool: 
+          vmImage: 'ubuntu-latest'      
+        steps:
+
+#.NET build this downloads the correct SDK version for your build. 
+        - task: UseDotNet@2
+          inputs:
+            packageType: 'sdk'
+            version: '$(sdkVersion)'
+          displayName: 'dotnet $(sdkVersion)'
+
+#.NET Publish with arguments for the configuration
+#this will build, create and store an artifact to 
+#be retrieved by the deploy stage.
+        - task: DotNetCoreCLI@2
+          inputs:
+            command: publish
+            publishWebProjects: true
+            arguments:
+              --configuration $(buildConfiguration)
+              --output $(Build.ArtifactStagingDirectory)/app
+            modifyOutputPath: false
+            zipAfterPublish: false
+          displayName: dotnet publish
+
+#not sure what this is. I thknk it creates the artifact to be retrieved later
+#is there a template in the task manager for this?
+        - publish: $(Build.ArtifactStagingDirectory)/app
+          artifact: app
+          displayName: artifact publish app
+  
+  - stage: 
+    jobs:
+      - job: 'build'
+        pool: 
+          vmImage: 'ubuntu-latest'  
+        steps:
+
+          - task: SonarCloudPrepare@1
+            inputs:
+              SonarCloud: 'pipelineDemo1'
+              organization: '042020-dotnet-uta'
+              scannerMode: 'MSBuild'
+              projectKey: '6ad11094b9f328712a3441dd2d6ae050aa1d2ad5'
+              projectName: 'pipelineDemo1'
+              extraProperties: |
+                sonar.exclusions=**/obj/**,**/*.dll
+                sonar.branch.name=$(Build.SourceBranchName)
+                sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
+                sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/*.xml
+          
+          - script: dotnet build $(solutionPath)
+
+          - task: DotNetCoreCLI@2
+            displayName: 'dotnet testing'
+            inputs:
+              command: 'test'
+              arguments: '--configuration $(BuildConfiguration)
+                /p:CollectCoverage=true
+                /p:CoverletOutputFormat=opencover
+                /p:Coverletoutput=$(Build.SourceDirector)/TestResults/Coverage
+                --logger trx'
+              projects: '**/*pipelineDemoTests1.csproj'
+              nobuild: true
+          - task: SonarCloudAnalyze@1
+          - task: SonarCloudPublish@1
+            inputs:
+              pollingTimeoutSec: '300'
+          - script: dotnet publish $(solutionPath)
+
+  - stage: 'deploy'
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    dependsOn: build
+
+    jobs:
+    - deployment: deploy_dev
+      pool:
+        vmImage: ubuntu-latest
+      environment: dev
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            # - download: current
+            #   artifact: app
+            #   displayName: artifact download app
+            - task: AzureRmWebAppDeployment@4
+              inputs:
+                ConnectionType: 'AzureRM'
+                azureSubscription: 'Azure subscription 1(5d150957-9944-40b9-b9e9-2a32c983a1f8)'
+                appType: 'webApp'
+                WebAppName: 'pipelineDemo11'
+                packageForLinux: '$(Pipeline.Workspace)/app'
