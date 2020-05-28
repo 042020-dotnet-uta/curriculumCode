@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="75cb8728-5197-4ee4-b31c-1a806b6cce58" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8000/FridgeService/Fridge/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Microsoft.ServiceModel.Samples.wsdl" MetadataType="Wsdl" ID="acb68309-91f4-4d77-81b2-5b086565b92c" SourceId="1" SourceUrl="http://localhost:8000/FridgeService/Fridge/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="b499122a-56da-4a93-b451-4ad26f26f533" SourceId="1" SourceUrl="http://localhost:8000/FridgeService/Fridge/mex" />
+    <MetadataFile FileName="Microsoft.ServiceModel.Samples.xsd" MetadataType="Schema" ID="c55bff46-da6d-4582-a5a3-2962915983be" SourceId="1" SourceUrl="http://localhost:8000/FridgeService/Fridge/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="c219811f-3add-451f-af84-59ac3af0751c" SourceId="1" SourceUrl="http://localhost:8000/FridgeService/Fridge/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="416167a4-d72c-4ea6-9b9d-18d70716c8cd" SourceId="1" SourceUrl="http://localhost:8000/FridgeService/Fridge/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

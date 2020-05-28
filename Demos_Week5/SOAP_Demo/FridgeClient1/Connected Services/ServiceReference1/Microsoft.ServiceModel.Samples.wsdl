@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://Microsoft.ServiceModel.Samples" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://Microsoft.ServiceModel.Samples" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://Microsoft.ServiceModel.Samples/Imports">
+      <xsd:import namespace="http://Microsoft.ServiceModel.Samples" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IFridge_AddFood_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddFood" />
+  </wsdl:message>
+  <wsdl:message name="IFridge_AddFood_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddFoodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFridge_SubtractFood_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubtractFood" />
+  </wsdl:message>
+  <wsdl:message name="IFridge_SubtractFood_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubtractFoodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFridge_Food_InputMessage">
+    <wsdl:part name="parameters" element="tns:Food" />
+  </wsdl:message>
+  <wsdl:message name="IFridge_Food_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FoodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFridge_EmptyFridge_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmptyFridge" />
+  </wsdl:message>
+  <wsdl:message name="IFridge_EmptyFridge_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EmptyFridgeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IFridge">
+    <wsdl:operation name="AddFood">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IFridge/AddFood" message="tns:IFridge_AddFood_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IFridge/AddFoodResponse" message="tns:IFridge_AddFood_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubtractFood">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IFridge/SubtractFood" message="tns:IFridge_SubtractFood_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IFridge/SubtractFoodResponse" message="tns:IFridge_SubtractFood_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Food">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IFridge/Food" message="tns:IFridge_Food_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IFridge/FoodResponse" message="tns:IFridge_Food_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EmptyFridge">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IFridge/EmptyFridge" message="tns:IFridge_EmptyFridge_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IFridge/EmptyFridgeResponse" message="tns:IFridge_EmptyFridge_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
