@@ -1,0 +1,16 @@
+{
+  "name": "RPS_Typescript",
+  "version": "1.0.0",
+  "description": "This is a Rock/Paper/Scissors Sample game with TypeScript",
+  "main": "index.js",
+  "scripts": {
+	  "tsc": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mark Moore",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^3.9.3"
+  }
+}
